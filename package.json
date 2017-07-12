@@ -1,10 +1,9 @@
 {
 	"name": "shelving-mock-event",
 	"description": "Fully unit tested mock for browser Event API.",
-	"version": "0.1.0",
+	"version": "1.0.0",
 	"license": "0BSD",
 	"author": "Dave Houlbrooke <dave@shax.com>",
-	"private": true,
 	"main": "lib/mock.js",
 	"engines": {
 		"node": "^8.0.0"
