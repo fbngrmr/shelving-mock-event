@@ -19,7 +19,7 @@ Supports the following functionality:
 
 ### Create an event target and dispatch events on it
 
-This full example shows how you would create an `EventTarget` (with a parent `EventTarget` that would also receive bubbled events), and dispatch an `Event` on that target:
+This full example shows how you would create an `EventTarget` (with a parent `EventTarget` that events will bubble up to), and dispatch an `Event` on that target:
 
 ```js
 import { Event, EventTarget } from 'shelving-mock-event';
@@ -101,7 +101,7 @@ Instantiate Events and dispatch them on EventTargets using `target.dispatchEvent
 	Whether the event should bubble up to the parent EventTarget when dispatched. The default is `false`
 
 - `cancellable` (boolean)  
-	Whether the event can be cancelled with `event.preventDefault()`. The default is `false`
+	Whether the event can be cancelled. The default is `false`
 
 #### Properties
 
@@ -115,13 +115,18 @@ Instantiate Events and dispatch them on EventTargets using `target.dispatchEvent
 	Whether this event will bubble or not (matches what was passed in to the constructor).
 
 - `event.target` (boolean) (read only)  
-	A reference to the original `EventTarget` that `dispatchEvent()` was called on.
+	A reference to the original event target the event was called on.
 
 - `event.currentTarget` (boolean) (read only)  
-	A reference to the current `EventTarget` that this event is firing on.
+	A reference to the current target that this event is firing on.
 
 - `event.eventPhase` (constant) (read only)  
-	The current phase of the event. One of: `Event.NONE`, `Event.CAPTURING_PHASE`, `Event.AT_TARGET`, `Event.BUBBLING_PHASE`
+	The current phase of the event. Will be one of the following: 
+	
+	- `Event.NONE`
+	- `Event.CAPTURING_PHASE`
+	- `Event.AT_TARGET`
+	- `Event.BUBBLING_PHASE`
 
 - `event.timeStamp` (number) (read only)  
 	The time this event was created, in milliseconds.
@@ -146,18 +151,18 @@ Instantiate Events and dispatch them on EventTargets using `target.dispatchEvent
 target = new EventTarget(parent?: EventTarget, handlers?: [string])
 ```
 
-An object which can have events dispatched on it using `target.dispatchEvent(event)`. Conforms to the [EventTarget](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget) interface.
+An object which can have events dispatched on it. Conforms to the [EventTarget](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget) interface.
 
 - `parent` (EventTarget)  
 	The parent element for this element that events will bubble up to (if specified)
 
 - `handlers` (array of strings)  
-	Allow event handlers on this EventTarget (e.g. `el.onclick = function(){}`). Handlers that are not explicitly named in the constructor will not be called when an event is dispatched. Handlers can only be functions.
+	Allow event handlers on this target. Handlers that are not explicitly named in the constructor will not be called when an event is dispatched. Handlers must be functions.
 
 #### Properties
 
 - `target.onclick` (function)  
-	Set this property to a `function` and that function will be called when an event is dispatched with e.g. `target.dispatchEvent(new Event('click'))`. Any event can have a handler, but they must be explicitly specified in the constructor. If handler is not `function` or `undefined` then `TypeError` will be thrown.
+	Set this property to a function to be called when an event is dispatched. Handler names must be explicitly specified in the constructor. If handler is not a function then `TypeError` will be thrown.
 
 #### Methods
 
@@ -188,7 +193,7 @@ Remove a specific event listener from an `EventTarget`.
 	The name of the event you wish to stop listening for, e.g. `'click'`, `'blur'` or `'my-custom-event'`
 
 - `callback` (function)  
-	The callback function you wish to remove. Must be a reference to the same callback function that was added with `addEventListener()`
+	The callback function you wish to remove. Must be a reference to the same callback function that was added.
 
 - `capturing` (boolean)  
-	Must match the `capturing` setting that was used when the event was added with `addEventListener()`
+	Must match the `capturing` setting that was used when the event was added.
