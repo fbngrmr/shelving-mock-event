@@ -1,15 +1,18 @@
 # Event mock
+Fully unit tested mock implementation of the browser Event API. Conforms as closely as possible to [https://developer.mozilla.org/en-US/docs/Web/API/Event](Event).
 
-Unit-tested mock/polyfill for Event and EventTarget from the browser DOM.
+[![Build Status](https://travis-ci.org/dhoulb/mock-event.svg?branch=master)](https://travis-ci.org/dhoulb/mock-event)
 
-Compatable with Event and EventTarget interfaces from the browser/DOM API, but can be used in server-side code on Node or other places where the browser APIs are not available. Supports the following functionality:
+Mocked Event and EventTarget classes that conform to browser's Event API. Can be used to simulate events in server-side code for testing, or in other places where browser APIs are not available. 
 
-- EventTarget listener callbacks, e.g. `addEventListener('click', () => {})` and `removeEventListener()`
-- EventTarget handler callbacks, e.g. `target.onclick = () => {}`
-- Event dispatch, e.g. `el.dispatchEvent(new Event('click', { bubbles: true }))`
-- Parent heirarchy with bubbling (and capturing) like DOM targets
-- Stopping propagation, e.g. `event.stopPropagation()` and `event.stopImmediatePropagation()`
-- Preventing default, e.g. `event.preventDefault()`
+Supports the following functionality:
+
+- Event listeners, e.g. `addEventListener('click', () => {})` and `removeEventListener()`
+- Event handlers, e.g. `target.onclick = () => {}`
+- Event dispatch, e.g. `dispatchEvent(new Event('click', { bubbles: true }))`
+- Parent heirarchy with bubbling (and capturing) like DOM elements
+- Stopping propagation with `stopPropagation()` and `stopImmediatePropagation()`
+- Preventing default with `preventDefault()`
 
 ## Examples
 
@@ -48,7 +51,7 @@ target.dispatchEvent(new Event('click', { bubbles: true }));
 ```
 
 ### Creating a custom event targets
-`EventTarget` is not usually used directly, but is implemented in specific class. Javascript ES6 classes make this easy as you can simply extend `EventTarget`:
+`EventTarget` is not normally used directly, but is implemented by a specific class. Javascript ES6 classes make this easy as you can simply extend `EventTarget`:
 
 ```js
 // Create a custom Javascript class.

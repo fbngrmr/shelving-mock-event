@@ -1,6 +1,6 @@
 {
 	"name": "shelving-mock-event",
-	"description": "Fully unit tested mock for browser Event API.",
+	"description": "Fully unit tested mock implementation of the browser Event API.",
 	"version": "1.0.0",
 	"license": "0BSD",
 	"author": "Dave Houlbrooke <dave@shax.com>",
