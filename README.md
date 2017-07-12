@@ -17,6 +17,7 @@ Supports the following functionality:
 ## Examples
 
 ### Create an event target and dispatch events on it
+
 This full example shows how you would create an `EventTarget` (with a parent `EventTarget` that would also receive bubbled events), and dispatch an `Event` on that target:
 
 ```js
@@ -51,6 +52,7 @@ target.dispatchEvent(new Event('click', { bubbles: true }));
 ```
 
 ### Creating a custom event targets
+
 `EventTarget` is not normally used directly, but is implemented by a specific class. Javascript ES6 classes make this easy as you can simply extend `EventTarget`:
 
 ```js
@@ -82,98 +84,133 @@ thing.dispatchEvent(new Event('boom'));
 
 ## API
 
-### `Event` (class)
-Instantiate Events and dispatch them on EventTargets using `target.dispatchEvent(new Event('click'))`. Conforms to the [https://developer.mozilla.org/en-US/docs/Web/API/Event](Event) interface.
+### `Event`
 
-> `event = new Event(type: string, { bubbles = false, cancelable = false })`
-> Create a new event.
+```typescript
+event = new Event(type: string, { bubbles = false, cancelable = false })
+```
 
-> > `type` (string)
-> > The name of the event, e.g. `'click'`, `'blur'` or `'my-custom-event'`
+Instantiate Events and dispatch them on EventTargets using `target.dispatchEvent(new Event('click'))`. Conforms to the [Event](https://developer.mozilla.org/en-US/docs/Web/API/Event) interface.
 
-> > `bubbles` (boolean)
-> > Whether the event should bubble up to the parent EventTarget when dispatched. The default is `false`
 
-> > `cancellable` (boolean)
-> > Whether the event can be cancelled with `event.preventDefault()`. The default is `false`
+- `type` (string)  
 
-#### Properties
+	The name of the event, e.g. `'click'`, `'blur'` or `'my-custom-event'`
 
-> `event.type` (string) (read only)
-> The name of the event, e.g. `'click'`, `'blur'` or `'my-custom-event'` (matches what was passed in to the constructor.
+- `bubbles` (boolean)  
 
-> `event.cancellable` (boolean) (read only)
-> Whether this event can be cancelled or not (matches what was passed in to the constructor).
+	Whether the event should bubble up to the parent EventTarget when dispatched. The default is `false`
 
-> `event.bubbles` (boolean) (read only)
-> Whether this event will bubble or not (matches what was passed in to the constructor).
+- `cancellable` (boolean)  
 
-> `event.target` (boolean) (read only)
-> A reference to the original `EventTarget` that `dispatchEvent()` was called on.
-
-> `event.currentTarget` (boolean) (read only)
-> A reference to the current `EventTarget` that this event is firing on.
-
-> `event.eventPhase` (constant) (read only)
-> The current phase of the event. One of: `Event.NONE`, `Event.CAPTURING_PHASE`, `Event.AT_TARGET`, `Event.BUBBLING_PHASE`
-
-> `event.timeStamp` (number) (read only)
-> The time this event was created, in milliseconds.
-
-> `event.defaultPrevented` (boolean) (read only)
-> Whether or not event.preventDefault() has been called on the event.
-
-#### Methods
-
-> `event.preventDefault()`
-> Cancels the event (if it is cancelable).
-
-> `event.stopPropagation()`
-> Stops the propagation (bubbling or capturing) of events on targets further along in the event dispatch order.
-
-> `event.stopImmediatePropagation()`
-> Stops the propagation (bubbling or capturing) of events on targets further along in the event dispatch order _and_ any further events on the current target.
-
-### `EventTarget` (class)
-An object which can have `Event` instances dispatched on it using `target.dispatchEvent(event)`. Conforms to the [https://developer.mozilla.org/en-US/docs/Web/API/EventTarget](EventTarget) interface.
-
-> `target = new EventTarget(parent?: EventTarget, handlers?: [string])`
-> Create a new EventTarget.
-
-> > `parent` (EventTarget)
-> > The parent element for this element that events will bubble up to (if specified)
-
-> > `handlers` (array of strings)
-> > Allow event handlers on this EventTarget (e.g. `el.onclick = function(){}`). Handlers that are not explicitly named in the constructor will not be called when an event is dispatched. Handlers can only be functions.
+	Whether the event can be cancelled with `event.preventDefault()`. The default is `false`
 
 #### Properties
 
-> `target.onclick` (function)
-> Set this property to a `function` and that function will be called when an event is dispatched with e.g. `target.dispatchEvent(new Event('click'))`. Any event can have a handler, but they must be explicitly specified in the constructor. If handler is not `function` or `undefined` then `TypeError` will be thrown.
+- `event.type` (string) (read only)  
+
+	The name of the event, e.g. `'click'`, `'blur'` or `'my-custom-event'` (matches what was passed in to the constructor.
+
+- `event.cancellable` (boolean) (read only)  
+
+	Whether this event can be cancelled or not (matches what was passed in to the constructor).
+
+- `event.bubbles` (boolean) (read only)  
+
+	Whether this event will bubble or not (matches what was passed in to the constructor).
+
+- `event.target` (boolean) (read only)  
+
+	A reference to the original `EventTarget` that `dispatchEvent()` was called on.
+
+- `event.currentTarget` (boolean) (read only)  
+
+	A reference to the current `EventTarget` that this event is firing on.
+
+- `event.eventPhase` (constant) (read only)  
+
+	The current phase of the event. One of: `Event.NONE`, `Event.CAPTURING_PHASE`, `Event.AT_TARGET`, `Event.BUBBLING_PHASE`
+
+- `event.timeStamp` (number) (read only)  
+
+	The time this event was created, in milliseconds.
+
+- `event.defaultPrevented` (boolean) (read only)  
+
+	Whether or not event.preventDefault() has been called on the event.
 
 #### Methods
 
-> `target.addEventListener(type: string, callback: function, capturing = false)`
-> Add an event listener to an `EventTarget`. Event listeners are callback functions that are called when the named event is dispatched on that `EventTarget` (or is dipatched on one of its children and bubbles up to the target).
+- `event.preventDefault()`  
 
-> > `type` (string)
-> > The name of the event to listen for, e.g. `'click'`, `'blur'` or `'my-custom-event'`
+	Cancels the event (if it is cancelable).
 
-> > `callback` (string)
-> > The callback function that gets called when `type` events are dispatched on this target. The callback function will receive the following arguments:
-> > > `event`: the `Event` object that was dispatched on the event target.
+- `event.stopPropagation()`  
 
-> > `capturing` (boolean)
-> > Whether the listener should be attached to the capturing phase (before listeners on the target) or the bubbling phase (after listeners on the target). The default is `false` (bubbling phase).
+	Stops the propagation (bubbling or capturing) of events on targets further along in the event dispatch order.
 
-> `target.removeEventListener(type: string, callback: function, capturing = false)`
-> Remove a specific event listener from an `EventTarget`.
+- `event.stopImmediatePropagation()`  
 
-> > `type` (string)
-> > The name of the event you wish to stop listening for, e.g. `'click'`, `'blur'` or `'my-custom-event'`
+	Stops the propagation (bubbling or capturing) of events on targets further along in the event dispatch order _and_ any further events on the current target.
 
-> > `callback` (string)
-> > The callback function you wish to remove. Must be a reference to the same callback function that was added with `addEventListener()`
+### `EventTarget`
 
-> > `capturing` (boolean)
-> > Must match the `capturing` setting that was used when the event was added with `addEventListener()`
+```typescript
+target = new EventTarget(parent?: EventTarget, handlers?: [string])
+```
+
+An object which can have events dispatched on it using `target.dispatchEvent(event)`. Conforms to the [EventTarget](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget) interface.
+
+- `parent` (EventTarget)  
+
+	The parent element for this element that events will bubble up to (if specified)
+
+- `handlers` (array of strings)  
+
+	Allow event handlers on this EventTarget (e.g. `el.onclick = function(){}`). Handlers that are not explicitly named in the constructor will not be called when an event is dispatched. Handlers can only be functions.
+
+#### Properties
+
+- `target.onclick` (function)
+
+	Set this property to a `function` and that function will be called when an event is dispatched with e.g. `target.dispatchEvent(new Event('click'))`. Any event can have a handler, but they must be explicitly specified in the constructor. If handler is not `function` or `undefined` then `TypeError` will be thrown.
+
+#### Methods
+
+```typescript
+target.addEventListener(type: string, callback: function, capturing = false)
+```
+
+Add an event listener to an `EventTarget`. Event listeners are callback functions that are called when the named event is dispatched on that `EventTarget` (or is dipatched on one of its children and bubbles up to the target).
+
+- `type` (string)  
+
+	The name of the event to listen for, e.g. `'click'`, `'blur'` or `'my-custom-event'`
+ 
+- `callback` (function)  
+
+	The callback function that gets called when `type` events are dispatched on this target. The callback function will receive the following arguments:
+	
+	- `event`: the `Event` object that was dispatched on the event target.
+
+- `capturing` (boolean)  
+
+	Whether the listener should be attached to the capturing phase (before listeners on the target) or the bubbling phase (after listeners on the target). The default is `false` (bubbling phase).
+
+```typescript
+target.removeEventListener(type: string, callback: function, capturing = false)
+```
+
+Remove a specific event listener from an `EventTarget`.
+
+- `type` (string)  
+
+	The name of the event you wish to stop listening for, e.g. `'click'`, `'blur'` or `'my-custom-event'`
+
+- `callback` (function)  
+
+	The callback function you wish to remove. Must be a reference to the same callback function that was added with `addEventListener()`
+
+- `capturing` (boolean)  
+
+	Must match the `capturing` setting that was used when the event was added with `addEventListener()`
