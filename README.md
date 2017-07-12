@@ -1,7 +1,8 @@
 # Event mock
-Fully unit tested mock implementation of the browser Event API. Conforms as closely as possible to [https://developer.mozilla.org/en-US/docs/Web/API/Event](Event).
 
 [![Build Status](https://travis-ci.org/dhoulb/mock-event.svg?branch=master)](https://travis-ci.org/dhoulb/mock-event)
+
+Fully unit tested mock implementation of the browser Event API. Conforms as closely as possible to [https://developer.mozilla.org/en-US/docs/Web/API/Event](Event).
 
 Mocked Event and EventTarget classes that conform to browser's Event API. Can be used to simulate events in server-side code for testing, or in other places where browser APIs are not available. 
 
