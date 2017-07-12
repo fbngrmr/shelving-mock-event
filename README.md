@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/dhoulb/mock-event.svg?branch=master)](https://travis-ci.org/dhoulb/mock-event)
 
-Fully unit tested mock implementation of the browser Event API. Conforms as closely as possible to [https://developer.mozilla.org/en-US/docs/Web/API/Event](Event).
+Fully unit tested mock implementation of the browser Event API. Conforms as closely as possible to [Event](https://developer.mozilla.org/en-US/docs/Web/API/Event).
 
 Mocked Event and EventTarget classes that conform to browser's Event API. Can be used to simulate events in server-side code for testing, or in other places where browser APIs are not available. 
 
@@ -87,17 +87,17 @@ thing.dispatchEvent(new Event('boom'));
 
 ### Event
 
-- `new Event(type: string, { bubbles = false, cancelable = false })`
-	Create a new event that can be dispatched on an event target. Conforms to the [Event](https://developer.mozilla.org/en-US/docs/Web/API/Event) interface.
+`new Event(type, { bubbles = false, cancelable = false })`  
+Create a new event that can be dispatched on an event target. Conforms to the [Event](https://developer.mozilla.org/en-US/docs/Web/API/Event) interface.
 
-	- `type` (string)  
-		The name of the event, e.g. `'click'`, `'blur'` or `'my-custom-event'`
+- `type` (string)  
+	The name of the event, e.g. `'click'`, `'blur'` or `'my-custom-event'`
 
-	- `bubbles` (boolean)  
-		Whether the event should bubble up to the parent EventTarget when dispatched. The default is `false`
+- `bubbles` (boolean)  
+	Whether the event should bubble up to the parent EventTarget when dispatched. The default is `false`
 
-	- `cancellable` (boolean)  
-		Whether the event can be cancelled. The default is `false`
+- `cancellable` (boolean)  
+	Whether the event can be cancelled. The default is `false`
 
 #### Properties
 
@@ -143,14 +143,14 @@ thing.dispatchEvent(new Event('boom'));
 
 ### EventTarget
 
-- `new EventTarget(parent?: EventTarget, handlers?: [string])`  
-	An object which can have events dispatched on it. Conforms to the [EventTarget](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget) interface.
+`new EventTarget(parent = undefined, handlers = [])`  
+An object which can have events dispatched on it. Conforms to the [EventTarget](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget) interface.
 
-	- `parent` (EventTarget)  
-		The parent element for this element that events will bubble up to (if specified)
+- `parent` (EventTarget)  
+	The parent element for this element that events will bubble up to (if specified)
 
-	- `handlers` (array of strings)  
-		Allow event handlers on this target. Handlers that are not explicitly named in the constructor will not be called when an event is dispatched. Handlers must be functions.
+- `handlers` (array of strings)  
+	Allow event handlers on this target. Handlers that are not explicitly named in the constructor will not be called when an event is dispatched. Handlers must be functions. Do not include 'on' at the start of the handler name.
 
 #### Properties
 
@@ -159,7 +159,7 @@ thing.dispatchEvent(new Event('boom'));
 
 #### Methods
 
-- `EventTarget.addEventListener(type: string, callback: function, capturing = false)`  
+- `EventTarget.addEventListener(type, callback, capturing = false)`  
 	Add an event listener to an event target. Event listeners are callback functions that are called when the named event is dispatched on the event target or one of its children.
 
 	- `type` (string)  
@@ -174,7 +174,7 @@ thing.dispatchEvent(new Event('boom'));
 	- `capturing` (boolean)  
 		Whether the listener should be attached to the capturing phase (before listeners on the target) or the bubbling phase (after listeners on the target). The default is `false` (bubbling phase).
 
-- `EventTarget.removeEventListener(type: string, callback: function, capturing = false)`  
+- `EventTarget.removeEventListener(type, callback, capturing = false)`  
 	Remove a specific event listener from an event target.
 
 	- `type` (string)  
