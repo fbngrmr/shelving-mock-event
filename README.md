@@ -8,9 +8,9 @@ Mocked Event and EventTarget classes that conform to browser's Event API. Can be
 
 Supports the following functionality:
 
-- Event listeners, e.g. `addEventListener('click', () => {})` and `removeEventListener()`
-- Event handlers, e.g. `target.onclick = () => {}`
-- Event dispatch, e.g. `dispatchEvent(new Event('click', { bubbles: true }))`
+- Event listeners, e.g. `addEventListener()` and `removeEventListener()`
+- Event handlers, e.g. `target.onclick = function()`
+- Event dispatch, e.g. `dispatchEvent()`
 - Parent heirarchy with bubbling (and capturing) like DOM elements
 - Stopping propagation with `stopPropagation()` and `stopImmediatePropagation()`
 - Preventing default with `preventDefault()`
