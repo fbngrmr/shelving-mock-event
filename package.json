@@ -17,6 +17,10 @@
 		"test": "jest",
 		"watch": "jest --watchAll --no-watchman"
 	},
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/dhoulb/mock-event.git"
+	},
 	"eslintConfig": {
 		"extends": "eslint:recommended",
 		"env": {
