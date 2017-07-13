@@ -24,18 +24,20 @@ This full example shows how you would create an `EventTarget` (with a parent `Ev
 ```js
 import { Event, EventTarget } from 'shelving-mock-event';
 
-// Create a parent target.
-const parent = new EventTarget();
+// Create targets.
 
-// Create an target and pass in the parent target.
-// Enable an `onclick` event handler for the target.
-const target = new EventTarget(parent, ['click']); 
+	// Create a parent target.
+	const parent = new EventTarget();
+
+	// Create a target and pass in the parent target.
+	// Allow `onclick` handler on the target.
+	const target = new EventTarget(parent, ['click']); 
 
 // Attach event listeners/handlers.
-// As-per the event capturing/bubbling model, they will be called in this order.
+// Will be called in this order (as-per the event capturing/bubbling model).
 
 	// Add event listener on parent.
-	// Will be called during capturing phase, i.e. before listeners/handlers on the target.
+	// Called during capturing phase, i.e. BEFORE listeners on the target.
 	parent.addEventListener('click', () => { console.log('Called 1'); }, true);
 
 	// Add event handler on target.
@@ -45,7 +47,7 @@ const target = new EventTarget(parent, ['click']);
 	target.addEventListener('click', () => { console.log('Called 3'); });
 	
 	// Add event listener on parent target.
-	// Will be called during bubbling phase, i.e. after listeners/handlers on the target.
+	// Called during bubbling phase, i.e. AFTER listeners on the target.
 	parentTarget.addEventListener('click', () => { console.log('Called 5'); });
 
 // Fire the event on the target.
