@@ -1,6 +1,6 @@
 # Event mock
 
-[![Build Status](https://travis-ci.org/dhoulb/mock-event.svg?branch=master)](https://travis-ci.org/dhoulb/mock-event)
+[![Build Status](https://travis-ci.org/dhoulb/shelving-mock-event.svg?branch=master)](https://travis-ci.org/dhoulb/shelving-mock-event)
 
 Fully unit tested mock implementation of the browser Event API. Conforms as closely as possible to [Event](https://developer.mozilla.org/en-US/docs/Web/API/Event).
 
