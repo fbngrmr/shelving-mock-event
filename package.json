@@ -4,13 +4,15 @@
 	"version": "1.0.12",
 	"license": "0BSD",
 	"author": "Dave Houlbrooke <dave@shax.com>",
-	"main": "lib/mock.js",
+	"main": "dist/mock.js",
 	"engineStrict": true,
 	"engines": {
 		"node": ">=6.0.0"
 	},
 	"dependencies": {},
 	"devDependencies": {
+		"babel-cli": "^6.26.0",
+		"babel-preset-es2015": "^6.24.1",
 		"eslint": "^3.19.0",
 		"jest": "^20.0.3"
 	},
